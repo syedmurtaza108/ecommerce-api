@@ -1,35 +1,31 @@
 const express = require('express');
 const morgan = require('morgan');
-const sql = require('mysql');
+const router = require('./router/product_router');
+const userRouter = require('./router/user_router');
 
 const app = express();
 
 app.use(morgan("dev"));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// app.get('/messages', (req, res)=>{
+//     sqlConnection.query('select * from message', (err, rows, fileds)=>{
+//         if(!err)
+//         res.status(200);
+//         else console.log(err);
+//     })
+// })
 
-var sqlConnection = sql.createConnection({
-    host: 'localhost', 
-    user: 'root',
-    database:'test_db',
-    password: 'click123'
-})
-
-sqlConnection.connect((err)=>{
-    if(!err)
-    console.log('connected');
-    else
-    console.log(JSON.stringify(err));
-})
-
-app.get('/messages', (req, res)=>{
-    sqlConnection.query('select * from message', (err, rows, fileds)=>{
-        if(!err)
-        res.status(200);
-        else console.log(err);
-    })
-})
+app.use('/product', router);
+app.use('/user', userRouter);
+app.post('/temp', (req, resp) => {
+    console.log('temp');
+    console.log(req.body);
+});
 
 const port = process.env.PORT || 8080
 
-app.listen(port);   
+console.log(port);
+
+app.listen(port);
