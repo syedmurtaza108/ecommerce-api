@@ -1,6 +1,7 @@
 const authTokens = {
   Admin: 'e220a1b1-cf45-4ccb-a557-ae9216cf231e',
   'david.c@mailinator.com': '3cfab5ee-60ac-4745-98e1-a141fb8f7786',
+  'moiz': 'fb557057-b83d-4b11-a4c5-531048f7221a'
 };
 
 const keys = Object.keys(authTokens);
